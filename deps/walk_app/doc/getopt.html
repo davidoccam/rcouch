@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Module getopt</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module getopt</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>Parses command line options with a format similar to that of GNU getopt.
+<p>Copyright © (C) 2009 Juan Jose Comellas</p>
+
+<p><b>Authors:</b> Juan Jose Comellas (<a href="mailto:juanjo@comellas.org"><tt>juanjo@comellas.org</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2>Parses command line options with a format similar to that of GNU getopt.
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-arg_spec">arg_spec()</a></h3>
+<p><tt>arg_spec() = <a href="#type-arg_type">arg_type()</a> | {<a href="#type-arg_type">arg_type()</a>, <a href="#type-arg_value">arg_value()</a>} | undefined</tt></p>
+<p>  Option type and optional default argument.</p>
+
+<h3 class="typedecl"><a name="type-arg_type">arg_type()</a></h3>
+<p><tt>arg_type() = atom | binary | boolean | float | integer | string</tt></p>
+<p>  Data type that an argument can be converted to.</p>
+
+<h3 class="typedecl"><a name="type-arg_value">arg_value()</a></h3>
+<p><tt>arg_value() = atom() | binary() | boolean() | float() | integer() | string()</tt></p>
+<p>  Argument specification.</p>
+
+<h3 class="typedecl"><a name="type-compound_option">compound_option()</a></h3>
+<p><tt>compound_option() = {atom(), <a href="#type-arg_value">arg_value()</a>}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-option">option()</a></h3>
+<p><tt>option() = <a href="#type-simple_option">simple_option()</a> | <a href="#type-compound_option">compound_option()</a></tt></p>
+<p>  Command line option specification.</p>
+
+<h3 class="typedecl"><a name="type-option_spec">option_spec()</a></h3>
+<p><tt>option_spec() = {Name::atom(), Short::char() | undefined, Long::string() | undefined, ArgSpec::<a href="#type-arg_spec">arg_spec()</a>, Help::string() | undefined}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-output_stream">output_stream()</a></h3>
+<p><tt>output_stream() = standard_io | standard_error</tt></p>
+
+
+<h3 class="typedecl"><a name="type-simple_option">simple_option()</a></h3>
+<p><tt>simple_option() = atom()</tt></p>
+
+
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#parse-2">parse/2</a></td><td> Parse the command line options and arguments returning a list of tuples
+        and/or atoms using the Erlang convention for sending options to a
+        function.</td></tr>
+<tr><td valign="top"><a href="#usage-2">usage/2</a></td><td> Show a message on standard_error indicating the command line options and
+        arguments that are supported by the program.</td></tr>
+<tr><td valign="top"><a href="#usage-3">usage/3</a></td><td> Show a message on standard_error or standard_io indicating the command line options and
+        arguments that are supported by the program.</td></tr>
+<tr><td valign="top"><a href="#usage-4">usage/4</a></td><td> Show a message on standard_error or standard_io indicating the command line options and
+        arguments that are supported by the program.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="parse-2">parse/2</a></h3>
+<div class="spec">
+<p><tt>parse(OptSpecList::[<a href="#type-option_spec">option_spec()</a>], CmdLine::string() | [string()]) -&gt; {ok, {[<a href="#type-option">option()</a>], [string()]}} | {error, {Reason::atom(), Data::any()}}</tt><br></p>
+</div><p> Parse the command line options and arguments returning a list of tuples
+        and/or atoms using the Erlang convention for sending options to a
+        function.</p>
+
+<h3 class="function"><a name="usage-2">usage/2</a></h3>
+<div class="spec">
+<p><tt>usage(OptSpecList::[<a href="#type-option_spec">option_spec()</a>], ProgramName::string()) -&gt; ok</tt><br></p>
+</div><p> Show a message on standard_error indicating the command line options and
+        arguments that are supported by the program.</p>
+
+<h3 class="function"><a name="usage-3">usage/3</a></h3>
+<div class="spec">
+<p><tt>usage(OptSpecList::[<a href="#type-option_spec">option_spec()</a>], ProgramName::string(), OutputStream::<a href="#type-output_stream">output_stream()</a> | string()) -&gt; ok</tt><br></p>
+</div><p> Show a message on standard_error or standard_io indicating the command line options and
+        arguments that are supported by the program.</p>
+
+<h3 class="function"><a name="usage-4">usage/4</a></h3>
+<div class="spec">
+<p><tt>usage(OptSpecList::[<a href="#type-option_spec">option_spec()</a>], ProgramName::string(), CmdLineTail::string(), OutputStream::<a href="#type-output_stream">output_stream()</a> | [{string(), string()}]) -&gt; ok</tt><br></p>
+</div><p> Show a message on standard_error or standard_io indicating the command line options and
+        arguments that are supported by the program. The CmdLineTail argument
+        is a string that is added to the end of the usage command line.</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Jun 10 2012, 21:18:12.</i></p>
+</body>
+</html>

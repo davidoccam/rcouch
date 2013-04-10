@@ -1,0 +1,29 @@
+ @title walk_app - simple parallel erlang file tree walking application 
+
+ @copyright 2012  David Martin <david.martin@lymegreen.co.uk> & 
+ plists  2007 Stephen Marsh freeyourmind ++ [$@|gmail.com]
+ @version 1.0.0
+
+ @doc walk_app is a simple parallel erlang tree walking OTP application using rebar and OTP framework.
+ <h2>Basic Usage</h2>
+
+ The basic pattern of use of couchbeam is:
+
+ <h3>1. Start walk_app</h3>
+
+ walk_app is an 
+ <a href="http://www.erlang.org/doc/design_principles/users_guide.html">OTP</a>
+ application.It uses plists to parallelise the accessing of files
+ <p>start walk_app
+ e.g erl -pa apps/*/ebin -boot start_sasl -s walk_app</p>
+ <p>then 
+ walk_app:parallelFileTreeWalk("/").</p><br>where "/" is path to start of walk - in this case the whole root filesystem</br>
+
+ Useful modules are:
+
+ <dl>
+    <dt>{@link index}</dt>
+    <dd></dd>
+
+
+ </dl>

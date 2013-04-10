@@ -1,0 +1,10 @@
+{application,gpio,
+             [{description,[]},
+              {vsn,"1"},
+              {registered,[]},
+              {applications,[kernel,stdlib]},
+              {mod,{gpio_app,[]}},
+              {env,[]},
+              {modules,[gpio0_server,gpio1_server,gpio2_server,gpio3_server,
+                        gpio4_server,gpio5_server,gpio6_server,gpio7_server,
+                        gpio_app,gpio_sup]}]}.

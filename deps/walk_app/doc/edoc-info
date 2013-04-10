@@ -1,0 +1,3 @@
+{application,walk_app}.
+{packages,[]}.
+{modules,[counter_server,getopt,plists,walk_app,walk_server,walk_sup]}.

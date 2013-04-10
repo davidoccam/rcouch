@@ -1,0 +1,12 @@
+{application, spi,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { spi_app, []}},
+  {env, []}
+ ]}.
