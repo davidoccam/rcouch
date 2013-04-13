@@ -4,7 +4,7 @@
 
 %% Application callbacks
 -export([start/2, stop/1]).
--export([apply_after/3]).
+-export([apply_after/4]).
 %% ===================================================================
 %% Application callbacks?
 %% ===================================================================
@@ -14,8 +14,8 @@ start(_StartType, _StartArgs) ->
 
 stop(_State) ->
     ok.
-
-apply_after( Time_after, For, Led_num)->
+%   spi_app:apply_after( 100, 100, 0, 100).
+apply_after( Time_after, For, Led_num, Increment)->
 
 Spi_list = [
 {0,  [ 128,   0,   0,    0,   0]    },
@@ -61,37 +61,8 @@ Spi_list = [
                   ets:insert(Spi_ets, E) end,
            Spi_list),
 
- spi0_server:spi_on_after(0, For, Spi_ets, 1),
- spi0_server:spi_on_after(1000, For, Spi_ets, 2),
- spi0_server:spi_on_after(2000, For, Spi_ets, 3),
- spi0_server:spi_on_after(3000, For, Spi_ets, 4),
- spi0_server:spi_on_after(4000, For, Spi_ets, 5),
- spi0_server:spi_on_after(5000, For, Spi_ets, 6),
- spi0_server:spi_on_after(6000, For, Spi_ets, 7),
- spi0_server:spi_on_after(7000, For, Spi_ets, 8),
- spi0_server:spi_on_after(8000, For, Spi_ets, 9),
- spi0_server:spi_on_after(9000, For, Spi_ets, 10),
- spi0_server:spi_on_after(10000, For, Spi_ets, 11),
- spi0_server:spi_on_after(11000, For, Spi_ets, 12),
- spi0_server:spi_on_after(12000, For, Spi_ets, 13),
- spi0_server:spi_on_after(13000, For, Spi_ets, 14),
- spi0_server:spi_on_after(14000, For, Spi_ets, 15),
- spi0_server:spi_on_after(15000, For, Spi_ets, 16),
- spi0_server:spi_on_after(16000, For, Spi_ets, 17),
- spi0_server:spi_on_after(17000, For, Spi_ets, 18),
- spi0_server:spi_on_after(18000, For, Spi_ets, 19),
- spi0_server:spi_on_after(19000, For, Spi_ets, 20),
- spi0_server:spi_on_after(20000, For, Spi_ets, 21),
- spi0_server:spi_on_after(21000, For, Spi_ets, 22),
- spi0_server:spi_on_after(22000, For, Spi_ets, 23),
- spi0_server:spi_on_after(23000, For, Spi_ets, 24),
- spi0_server:spi_on_after(24000, For, Spi_ets, 25),
- spi0_server:spi_on_after(25000, For, Spi_ets, 26),
- spi0_server:spi_on_after(26000, For, Spi_ets, 27),
- spi0_server:spi_on_after(27000, For, Spi_ets, 28),
- spi0_server:spi_on_after(28000, For, Spi_ets, 29),
- spi0_server:spi_on_after(29000, For, Spi_ets, 30),
- spi0_server:spi_on_after(30000, For, Spi_ets, 31),
- spi0_server:spi_on_after(31000, For, Spi_ets, 32),
- spi0_server:spi_on_after(32000, For, Spi_ets, 33),
- spi0_server:spi_on_after(33000, For, Spi_ets, 34).
+lists:foreach(fun(Y)->
+              spi0_server:spi_on_after(Y+(Increment*Y), For, Spi_ets, Y)
+              end,
+              lists:seq(1,34,1)).
+
