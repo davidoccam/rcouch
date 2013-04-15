@@ -24,27 +24,25 @@ process_flag(trap_exit, true),
 {ok,{}}.
 
 
-handle_call({on_timed,Time_on}, {From, State},_) ->
+handle_call({on_timed,Time_on}, _From, State) ->
 wpi:pin_mode(5,output),
 wpi:digital_write(5,1),
 case timer:apply_after(Time_on, gpio5_server, off,[]) of
-Any->ok
-%io:format("After ~p~n",[Any])
+_Any->ok
 end,
   {reply,ok, State};
 
 
-handle_call({on}, {From, State},_) ->
+handle_call({on}, _From, State) ->
 wpi:pin_mode(5,output),
 wpi:digital_write(5,1),
   {reply,ok, State};
 
-handle_call({off}, {From, State},_) ->
+handle_call({off}, _From, State) ->
 wpi:digital_write(5,0),
   {reply,ok,State};
 
-handle_call({direction, Reset_value},{ From, State},_) ->
-%io:format("Gpio5 Reset_value = ~p~n,From =  ~p~n,State ~p~n",[Reset_value, From, State]),
+handle_call({direction, Reset_value},_From, State) ->
   {reply, ok, Reset_value }.
 
 

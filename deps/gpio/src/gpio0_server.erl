@@ -28,7 +28,7 @@ process_flag(trap_exit, true),
 % gpio2_server:on_timed(1000).
 %%-------------------------------------------------------------------------
 
-handle_call({on_timed,Time_on}, {_From, State},_) ->
+handle_call({on_timed,Time_on}, _From, State) ->
 wpi:pin_mode(0,output),
 wpi:digital_write(0,1),
 case timer:apply_after(Time_on, gpio0_server, off,[]) of
@@ -38,17 +38,16 @@ end,
   {reply,ok, State};
 
 
-handle_call({on}, {_From, State},_) ->
+handle_call({on}, _From, State) ->
 wpi:pin_mode(0,output),
 wpi:digital_write(0,1),
   {reply,ok, State};
 
-handle_call({off}, {_From, State},_) ->
+handle_call({off}, _From, State) ->
 wpi:digital_write(0,0),
   {reply,ok,State};
 
-handle_call({direction, Reset_value},{ _From, _State},_) ->
-%io:format("Gpio0 Reset_value = ~p~n,From =  ~p~n,State ~p~n",[Reset_value, From, State]),
+handle_call({direction, Reset_value}, _From, _State) ->
   {reply, ok, Reset_value }.
 
 

@@ -22,29 +22,27 @@ io:format("init gpio1_server V1.0~n", []),
 process_flag(trap_exit, true),
 {ok,{}}.
 
-handle_call({on_timed,Time_on}, {From, State},_) ->
+handle_call({on_timed,Time_on}, _From, State) ->
 wpi:pin_mode(1,output),
 wpi:digital_write(1,1),
 case timer:apply_after(Time_on, gpio1_server, off,[]) of
-Any->ok
-%io:format("After ~p~n",[Any])
+_Any->ok
 end,
   {reply,ok, State};
 
 
-handle_call({on}, {From, State},_) ->
+handle_call({on}, _From, State) ->
 %io:format("Pin1 = ~p on ",[1]),
 wpi:pin_mode(1,output),
 wpi:digital_write(1,1),
   {reply,ok, State};
 
-handle_call({off}, {From, State},_) ->
+handle_call({off}, _From, State) ->
 %io:format("Pin1 = ~p off ",[1]),
 wpi:digital_write(1,0),
   {reply,ok,State};
 
-handle_call({direction, Reset_value}, {From, State},_) ->
-%io:format("Gpio2 Reset_value = ~p~n,From =  ~p~n,State ~p~n",[Reset_value, From, State]),
+handle_call({direction, Reset_value}, _From, State) ->
   {reply,ok,Reset_value }.
 
 
